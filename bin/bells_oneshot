@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -ex
+
+# Generate bitcoin.conf
+bells_init
+
+# Default / no argument invocation listens for RPC commands and has to accept non-localhost because of
+# Docker port proxying or Docker private networking.
+if [ $# -eq 0 ]; then
+    # If IPv6 is in the container do both:
+    set -- '-rpcbind=:19918' '-rpcallowip=0.0.0.0/0'
+fi
+
+exec bellscoind "$@"

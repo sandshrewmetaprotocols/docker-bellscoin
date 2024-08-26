@@ -1,0 +1,3 @@
+[submodule "bellscoin"]
+	path = bellscoin
+	url = https://github.com/Nintondo/bellscoin
