@@ -29,12 +29,12 @@ ARG USER_ID=1000
 RUN groupadd -g ${GROUP_ID} bellscoin \
     && useradd -u ${USER_ID} -g bellscoin -d /bellscoin bellscoin
 ENV HOME /bellscoin
-EXPOSE 22556
+EXPOSE 19918
 WORKDIR /bellscoin
 COPY --from=build /opt/ /opt/
 RUN apt update \
     && apt install -y --no-install-recommends gosu libatomic1 libboost-all-dev libssl-dev libdb++-dev curl gpg ca-certificates tar dirmngr build-essential git autoconf libtool pkg-config libdb++-dev libboost-dev libboost-system-dev bsdmainutils openssl libssl-dev automake make autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev libboost-thread-dev \
     && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && ln -sv /opt/bellscoin/src/bellscoind /usr/local/bin/bellscoind \
+    && ln -sv /opt/bellscoin/src/bellsd /usr/local/bin/bellsd \
     && ln -sv /opt/bin/* /usr/local/bin
 ENTRYPOINT ["bells_oneshot"]

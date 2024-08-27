@@ -3,12 +3,10 @@ services:
   bellscoind:
     image: sandshrewmetaprotocols/bellscoin
     entrypoint: ["bells_oneshot"]
-    command: ["-txindex", "-rpcbind=0.0.0.0"]
+    command: ["-txindex", "-rpcbind=0.0.0.0", "-rpcuser=bellscoinrpc", "-rpcpassword=bellscoinrpc"]
     build:
       dockerfile: Dockerfile
       context: ./
-    ports:
-      - 0.0.0.0:19919:19919
-      - 127.0.0.1:19918:19918
+    network_mode: 'host'
     volumes:
-      - ${BELLSCOIN_DATA}:/bellscoin/.bellscoin
+      - ${BELLSCOIN_DATA}:/bellscoin/.bells
